@@ -8,7 +8,7 @@ from app.repositories import user_repo
 from app.schemas.user_schema import *
 from app.services.constants import *
 from app.utils.constants import errorcodes
-from app.core.logging_config import log
+
 
 def create_user(user_data: UserCreate, db: SessionDep) -> User:
     if user_repo.get_user_by_email(str(user_data.email), db):

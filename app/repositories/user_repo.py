@@ -8,8 +8,8 @@ from app.models import User
 
 
 def get_user_by_email(email: str, db: SessionDep) -> Optional[User]:
-    query = select(User).where(User.email == email)
-    result = db.exec(query)
+    statement = select(User).where(User.email == email)
+    result = db.exec(statement)
     return result.first()
 
 
