@@ -1,3 +1,4 @@
+import datetime
 from typing import Optional
 from uuid import UUID
 
@@ -27,7 +28,7 @@ class UserRead(BaseModel):
     name: str
     role: UserRoleEnum
     email: EmailStr
-    created_at: str
+    created_at: datetime.datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
