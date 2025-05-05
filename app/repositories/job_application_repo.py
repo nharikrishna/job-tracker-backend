@@ -7,7 +7,7 @@ from app.dependencies.database import SessionDep
 from app.models import JobApplication
 
 
-def create_job_application(job: JobApplication, db: SessionDep) -> JobApplication:
+def save_job_application(job: JobApplication, db: SessionDep) -> JobApplication:
     db.add(job)
     db.commit()
     db.refresh(job)

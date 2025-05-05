@@ -23,6 +23,7 @@ class DatabaseSettings(BaseModel):
 
 
 class Settings(BaseSettings):
+    app_env: str
     DB: DatabaseSettings
     secret_key: str
     algorithm: str

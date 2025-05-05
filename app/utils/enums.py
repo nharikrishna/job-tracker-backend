@@ -14,3 +14,8 @@ class JobStatusEnum(str, Enum):
 class UserRoleEnum(str, Enum):
     USER = "user"
     ADMIN = "admin"
+
+
+class FileTypeEnum(str, Enum):
+    RESUME = "resume"
+    JOB_DESCRIPTION = "job_description"

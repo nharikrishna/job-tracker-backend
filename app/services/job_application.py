@@ -12,17 +12,10 @@ from app.utils.constants import errorcodes
 
 def create_job(job_data: schema.JobBase, user_id: UUID, db: SessionDep) -> JobApplication:
     job = JobApplication(
-        user_id=user_id,
-        company=job_data.company,
-        role=job_data.role,
-        status=job_data.status,
-        applied_date=job_data.applied_date,
-        notes=job_data.notes,
-        tags=job_data.tags,
-        resume_file_path=job_data.resume_file_path,
-        job_description_file_path=job_data.job_description_file_path,
+        **job_data.model_dump(),
+        user_id=user_id
     )
-    return repo.create_job_application(job, db)
+    return repo.save_job_application(job, db)
 
 
 def get_jobs(user_id: UUID, db: SessionDep) -> List[JobApplication]:
@@ -48,7 +41,7 @@ def update_job(job_id: UUID, update: schema.JobUpdate, user_id: UUID, db: Sessio
     for field, value in update.model_dump(exclude_unset=True).items():
         setattr(job, field, value)
 
-    return repo.create_job_application(job, db)
+    return repo.save_job_application(job, db)
 
 
 def delete_job(job_id: UUID, user_id: UUID, db: SessionDep) -> None:

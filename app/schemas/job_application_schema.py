@@ -11,18 +11,18 @@ class JobBase(BaseModel):
     company: str
     role: str
     status: JobStatusEnum = JobStatusEnum.WISHLIST
-    applied_date: Optional[datetime] = None
+    application_date: Optional[datetime] = None
     notes: Optional[str] = None
     tags: Optional[List[str]] = None
-    resume_file_path: str
-    job_description_file_path: str
+    resume_file_path: Optional[str] = None
+    job_description_file_path: Optional[str] = None
 
 
 class JobUpdate(BaseModel):
     company: Optional[str] = None
     role: Optional[str] = None
     status: Optional[JobStatusEnum] = None
-    applied_date: Optional[datetime] = None
+    application_date: Optional[datetime] = None
     notes: Optional[str] = None
     tags: Optional[List[str]] = None
     resume_file_path: Optional[str] = None

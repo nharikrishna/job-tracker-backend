@@ -12,3 +12,6 @@ UNAUTHORIZED = "Unauthorized"
 
 # Job Applications
 JOB_NOT_FOUND = "Job not found"
+
+# Resume Match
+RESUME_MATCH_NOT_FOUND = "Resume match not found"

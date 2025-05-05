@@ -2,19 +2,22 @@ from datetime import datetime
 from typing import Optional, List
 from uuid import UUID
 
+from fastapi import UploadFile
 from pydantic import BaseModel
 
 
-class ResumeMatchBase(BaseModel):
+class ResumeMatchCheck(BaseModel):
+    job_id: UUID
+    resume: UploadFile
+    job_description: UploadFile
+
+
+class ResumeMatchCreate(BaseModel):
+    job_id: UUID
     score: float
     suggestion_keywords: Optional[List[str]] = None
 
 
-class ResumeMatchCreate(ResumeMatchBase):
-    job_id: UUID
-
-
-class ResumeMatchOut(ResumeMatchBase):
+class ResumeMatchOut(ResumeMatchCreate):
     id: UUID
-    job_id: UUID
     created_at: datetime
