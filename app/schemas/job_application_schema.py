@@ -10,20 +10,29 @@ from app.utils.enums import JobStatusEnum
 class JobBase(BaseModel):
     company: str
     role: str
-    status: JobStatusEnum = JobStatusEnum.APPLIED
-    applied_date: Optional[datetime] = None
+    status: JobStatusEnum = JobStatusEnum.WISHLIST
+    application_date: Optional[datetime] = None
     notes: Optional[str] = None
     tags: Optional[List[str]] = None
-    resume_file_path: str
-    job_description_file_path: str
+    resume_file_path: Optional[str] = None
+    job_description_file_path: Optional[str] = None
 
 
-class JobCreate(JobBase):
-    user_id: UUID
+class JobUpdate(BaseModel):
+    company: Optional[str] = None
+    role: Optional[str] = None
+    status: Optional[JobStatusEnum] = None
+    application_date: Optional[datetime] = None
+    notes: Optional[str] = None
+    tags: Optional[List[str]] = None
+    resume_file_path: Optional[str] = None
+    job_description_file_path: Optional[str] = None
 
 
 class JobOut(JobBase):
     id: UUID
     user_id: UUID
+    company: str
+    role: str
     created_at: datetime
     updated_at: datetime

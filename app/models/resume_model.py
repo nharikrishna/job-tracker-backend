@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from typing import Optional, List, TYPE_CHECKING
 from uuid import UUID, uuid4
 
-from sqlalchemy import Column, JSON
+from sqlalchemy import Column, JSON, Text
 from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
@@ -15,6 +15,8 @@ class ResumeMatch(SQLModel, table=True):
 
     score: float
     suggestion_keywords: Optional[List[str]] = Field(default=None, sa_column=Column(JSON))
+    remarks: Optional[str] = Field(default=None, sa_column=Column(Text))
+
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     job: Optional["JobApplication"] = Relationship(back_populates="resume_match")

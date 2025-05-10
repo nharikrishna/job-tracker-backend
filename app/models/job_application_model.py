@@ -18,11 +18,10 @@ class JobApplication(SQLModel, table=True):
     role: str
     status: JobStatusEnum = Field(default=JobStatusEnum.APPLIED)
 
-    applied_date: datetime
-    notes: Optional[str] = None
-
-    resume_file_path: str
-    job_description_file_path: str
+    application_date: Optional[datetime] = Field(default=None, nullable=True)
+    notes: Optional[str] = Field(default=None, nullable=True)
+    resume_file_path: Optional[str] = Field(default=None, nullable=True)
+    job_description_file_path: Optional[str] = Field(default=None, nullable=True)
 
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(

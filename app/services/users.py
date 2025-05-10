@@ -10,7 +10,7 @@ from app.services.constants import *
 from app.utils.constants import errorcodes
 
 
-def create_user_service(user_data: UserCreate, db: SessionDep) -> User:
+def create_user(user_data: UserCreate, db: SessionDep) -> User:
     if user_repo.get_user_by_email(str(user_data.email), db):
         raise HTTPException(status_code=400, detail=errorcodes.USER_ALREADY_EXISTS)
 
@@ -24,7 +24,7 @@ def create_user_service(user_data: UserCreate, db: SessionDep) -> User:
     return user
 
 
-def update_user_service(user_id: UUID, update_data: UserUpdate, db: SessionDep) -> User:
+def update_user(user_id: UUID, update_data: UserUpdate, db: SessionDep) -> User:
     user = user_repo.get_user_by_id(user_id, db)
     if not user:
         raise HTTPException(status_code=404, detail=errorcodes.USER_NOT_FOUND)
@@ -43,7 +43,7 @@ def update_user_service(user_id: UUID, update_data: UserUpdate, db: SessionDep) 
     return user
 
 
-def delete_user_service(user_id: UUID, db: SessionDep):
+def delete_user(user_id: UUID, db: SessionDep):
     user = user_repo.get_user_by_id(user_id, db)
     if not user:
         raise HTTPException(status_code=404, detail=errorcodes.USER_NOT_FOUND)
@@ -54,8 +54,8 @@ def delete_user_service(user_id: UUID, db: SessionDep):
 
 def authenticate_user(user_data: UserBase, db: Session) -> str:
     user = user_repo.get_user_by_email(str(user_data.email), db)
-    if not user or not user.verify_password(user_data.password):
-        raise HTTPException(status_code=404, detail=errorcodes.INVALID_EMAIL_OR_PASSWORD)
+    if not user or not verify_password(user_data.password, user.password):
+        raise HTTPException(status_code=401, detail=errorcodes.INVALID_EMAIL_OR_PASSWORD)
 
     token = create_access_token(subject=user.id)
     return token

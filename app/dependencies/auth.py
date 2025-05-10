@@ -22,7 +22,7 @@ ALGORITHM = settings.algorithm
 def get_current_user(token: tokenDep, db: SessionDep) -> User:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: str = payload.get("subject")
+        user_id: str = payload.get("sub")
         if user_id is None:
             raise HTTPException(status_code=401, detail=errorcodes.INVALID_TOKEN)
 

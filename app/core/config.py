@@ -23,10 +23,14 @@ class DatabaseSettings(BaseModel):
 
 
 class Settings(BaseSettings):
+    app_env: str
     DB: DatabaseSettings
     secret_key: str
     algorithm: str
     access_token_expire: int
+
+    gemini_api_key: str
+    gemini_api_url: str
 
     class Config:
         env_file = Path(__file__).resolve().parents[2] / ".env"
