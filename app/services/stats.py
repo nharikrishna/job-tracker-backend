@@ -1,4 +1,5 @@
 from uuid import UUID
+
 from app.dependencies.database import SessionDep
 from app.repositories import job_application_repo
 

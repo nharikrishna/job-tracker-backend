@@ -15,6 +15,7 @@ class ResumeMatchCheck(BaseModel):
 class ResumeMatchCreate(BaseModel):
     job_id: UUID
     score: float
+    remarks: str
     suggestion_keywords: Optional[List[str]] = None
 
 

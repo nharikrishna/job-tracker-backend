@@ -7,13 +7,14 @@ from fastapi import UploadFile
 
 from app.core.config import get_settings
 from app.services import constants
+from app.utils.constants.constants import DEV
 from app.utils.enums import FileTypeEnum
 
 settings = get_settings()
 
 
 def save_file(file: UploadFile, file_type: FileTypeEnum, job_id: UUID) -> str:
-    if settings.app_env != constants.DEV:
+    if settings.app_env != DEV:
         raise NotImplementedError("File storage not supported in this environment yet.")
 
     folder = constants.RESUMES

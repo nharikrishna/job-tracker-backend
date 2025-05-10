@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import UploadFile, HTTPException
 
 from app import models
@@ -10,7 +12,6 @@ from app.services.constants import ALLOWED_EXTENSIONS
 from app.services.file_upload import save_file
 from app.utils.constants import errorcodes
 from app.utils.enums import FileTypeEnum
-from uuid import UUID
 
 
 def validate_extension(file: UploadFile):
@@ -46,12 +47,13 @@ def process_resume_match(resume_data: schema.ResumeMatchCheck, db: SessionDep):
     resume_path = save_file(resume_data.resume, FileTypeEnum.RESUME, job.id)
     job_description_path = save_file(resume_data.job_description, FileTypeEnum.JOB_DESCRIPTION, job.id)
 
-    score, suggestions = gemini.run_resume_matching(resume_data.resume.file, resume_data.job_description.file)
+    score, suggestions, remarks = gemini.run_resume_matching(resume_data.resume.file, resume_data.job_description.file)
 
     resume_create = schema.ResumeMatchCreate(
         job_id=job.id,
         score=score,
         suggestion_keywords=suggestions,
+        remarks=remarks,
     )
     resume_match = create_resume_match(resume_create, db)
 

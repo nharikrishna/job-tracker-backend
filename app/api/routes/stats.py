@@ -1,6 +1,7 @@
 from fastapi import APIRouter
-from app.dependencies.database import SessionDep
+
 from app.dependencies.auth import CurrentUserDep
+from app.dependencies.database import SessionDep
 from app.services import stats as stats_service
 
 router = APIRouter(prefix="/stats", tags=["Stats"])

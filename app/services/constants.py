@@ -1,7 +1,5 @@
 KEY_PASSWORD = "password"
 
-DEV = "dev"
-
 # Folder names
 RESUMES = "resumes"
 JOB_DESCRIPTIONS = "job_descriptions"

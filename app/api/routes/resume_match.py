@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, UploadFile, Form, File, status
 from uuid import UUID
+
+from fastapi import APIRouter, UploadFile, Form, File
 
 from app.dependencies.auth import CurrentUserDep
 from app.dependencies.database import SessionDep
@@ -11,11 +12,11 @@ router = APIRouter(prefix="/resume-match", tags=["resume match"])
 
 @router.post("/check", response_model=ResumeMatchOut)
 def check_resume_match(
-    db: SessionDep,
-    _: CurrentUserDep,
-    job_id: UUID = Form(...),
-    resume: UploadFile = File(...),
-    job_description: UploadFile = File(...)
+        db: SessionDep,
+        _: CurrentUserDep,
+        job_id: UUID = Form(...),
+        resume: UploadFile = File(...),
+        job_description: UploadFile = File(...)
 ):
     resume_data = ResumeMatchCheck(
         job_id=job_id,
