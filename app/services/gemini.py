@@ -44,7 +44,6 @@ def run_resume_matching(resume_file, jd_file) -> tuple[int, list[str], str]:
     score = result.get("score", 0)
     suggestions = result.get("suggested_keywords", [])
     remarks = result.get("remarks", "")
-    print(score, suggestions, remarks)
     return score, suggestions, remarks
 
 
