@@ -3,7 +3,7 @@ from typing import Annotated
 import jwt
 from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
-from jwt import DecodeError, ExpiredSignatureError
+from jwt.exceptions import DecodeError, ExpiredSignatureError
 
 from app.core.config import get_settings
 from app.dependencies.database import SessionDep
