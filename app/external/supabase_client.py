@@ -1,4 +1,5 @@
 from supabase import create_client
+
 import app.core.config as config
 
 settings = config.get_settings()
