@@ -40,7 +40,7 @@ def save_file(file: UploadFile, file_type: FileTypeEnum, job_id: UUID) -> str:
             file_options={"content-type": file.content_type}
         )
 
-        if res.get("error"):
-            raise RuntimeError(f"Upload failed: {res['error']['message']}")
+        if res.error:
+            raise RuntimeError(f"Upload failed: {res.error.message}")
 
         return supabase.storage.from_(settings.supabase_bucket).get_public_url(storage_path)
