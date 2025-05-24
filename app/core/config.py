@@ -32,6 +32,9 @@ class Settings(BaseSettings):
     gemini_api_key: str
     gemini_api_url: str
 
+    supabase_url: str
+    supabase_key: str
+
     class Config:
         env_file = Path(__file__).resolve().parents[2] / ".env"
         env_nested_delimiter = "__"
