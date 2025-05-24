@@ -36,7 +36,7 @@ def save_file(file: UploadFile, file_type: FileTypeEnum, job_id: UUID) -> str:
         storage_path = f"{folder}/{filename}"
         contents = file.file.read()
         try:
-            res = supabase.storage.from_(settings.SUPABASE_BUCKET).upload(
+            res = supabase.storage.from_(settings.supabase_bucket).upload(
                 path=storage_path,
                 file=contents,
                 file_options={"content-type": file.content_type}
