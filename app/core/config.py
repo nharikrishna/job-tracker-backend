@@ -34,6 +34,7 @@ class Settings(BaseSettings):
 
     supabase_url: str
     supabase_key: str
+    supabase_bucket: str
 
     class Config:
         env_file = Path(__file__).resolve().parents[2] / ".env"

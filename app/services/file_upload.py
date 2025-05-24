@@ -34,7 +34,7 @@ def save_file(file: UploadFile, file_type: FileTypeEnum, job_id: UUID) -> str:
     else:
         storage_path = f"{folder}/{filename}"
         contents = file.file.read()
-        res = supabase.storage.from_(settings.SUPABASE_BUCKET).upload(
+        res = supabase.storage.from_(settings.supabase_bucket).upload(
             path=storage_path,
             file=contents,
             file_options={"content-type": file.content_type}
@@ -43,4 +43,4 @@ def save_file(file: UploadFile, file_type: FileTypeEnum, job_id: UUID) -> str:
         if res.get("error"):
             raise RuntimeError(f"Upload failed: {res['error']['message']}")
 
-        return supabase.storage.from_(settings.SUPABASE_BUCKET).get_public_url(storage_path)
+        return supabase.storage.from_(settings.supabase_bucket).get_public_url(storage_path)
